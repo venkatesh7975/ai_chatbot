@@ -40,7 +40,7 @@ function App() {
             />
             <Route 
               path="/history" 
-              element={<History chatHistory={chatHistory} setChatHistory={setChatHistory} />} 
+              element={<History chatHistory={chatHistory} />} 
             />
           </Routes>
         </main>

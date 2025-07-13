@@ -1,9 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
-import "../App.css";
+import "../App.css"
 
-function Chat({ chatHistory, setChatHistory }) {
+function Chat({ setChatHistory }) {
   const [localChat, setLocalChat] = useState([]); // local state for current chat session
   const [question, setQuestion] = useState("");
   const [generating, setGenerating] = useState(false);
@@ -38,7 +38,7 @@ function Chat({ chatHistory, setChatHistory }) {
       // Save answer to DB
       await axios.post("http://localhost:5000/api/chats", aiMsg);
 
-      // Update parent history immediately for live updates
+      // Optionally update parent history immediately (if you want live update in history page)
       setChatHistory(prev => [...prev, userMsg, aiMsg]);
 
     } catch (err) {
@@ -56,11 +56,6 @@ function Chat({ chatHistory, setChatHistory }) {
     <div className="max-w-4xl mx-auto flex flex-col p-4">
       <header className="text-center mb-4">
         <h1 className="text-3xl font-bold text-blue-600">New Chat 📝</h1>
-        {chatHistory.length > 0 && (
-          <p className="text-sm text-gray-500 mt-1">
-            {chatHistory.length} message{chatHistory.length !== 1 ? 's' : ''} in history
-          </p>
-        )}
       </header>
 
       <div className="flex-1 overflow-y-auto mb-4 space-y-2">
@@ -87,11 +82,8 @@ function Chat({ chatHistory, setChatHistory }) {
           placeholder="Ask anything..."
           className="flex-1 border rounded p-2 focus:outline-none focus:border-blue-400"
         />
-        <button 
-          type="submit" 
-          disabled={generating}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50 transition"
-        >
+        <button type="submit" disabled={generating}
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50">
           Send
         </button>
       </form>
